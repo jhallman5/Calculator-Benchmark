@@ -3,4 +3,4 @@ Benchmark goal week 10
 
 Team - fragile-puffin
 
-Members - John Hallman
+Member - John Hallman
