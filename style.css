@@ -1,63 +1,75 @@
+@import 'normalize';
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+
 body {
-  font-family: Roboto;
-}
-
-.calculator{
-  width: 248px;
-  height: 380px;
-  line-height: 1.5;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  margin: auto;
-  background-color: #adadad;
+  font-family: 'Roboto', sans-serif;
+  display: flex;
+  justify-content: center;
   align-items: center;
-  border-radius: 10px;
-  box-shadow: 10px 10px 10px 5px grey;
-
 }
 
+.calculator {
+  width: 243px;
+  height: 375px;
+  line-height: 1.5;
+  position: relative;
+  display: flex;
+  flex-flow: row wrap;
+  background-color: #adadad;
+  justify-content: space-between;
+  align-content: space-between;
+  border-radius: 10px;
+  box-shadow: 20px 20px 45px #a9a9aa;
+}
 
-.calculator #screen {
-  width: 248px;
+.calculator-screen {
+  width: 243px;
   height: 70px;
   background-color: #adadad;
   border-radius: 10px;
   color: #f4f4f4;
   text-align: right;
-  font-size: 60px;
+  font-size: 50px;
 }
-.calculator .button{
-  display: inline-block;
+.calculator-button{
   position: relative;
-  float: left;
   width: 60px;
   background-color: #e5e5e5;
   text-align: center;
-  border: 1px solid #adadad;
-  font-size: 20px;
-  vertical-align: middle;
+  font-size: 25px;
   line-height: 60px;
 }
-.calculator .button:hover{
-  transition-delay: 100ms;
-  background-color: #c4c4c4;
-}
-.calculator .button:active {
-  transition-delay: 100ms;
-  background-color: #afafaf;
-}
+
 .calculator .orange  {
-  clear: right;
-  background-color: orange;
+  background-color: #e38e32;
   color: #f4f4f4;
 }
 
-.calculator .large{
-  width: 122px;
+.calculator .large {
+  flex-grow: .98;
   border-bottom-left-radius: 10px;
 }
+
 .calculator .corner{
   border-bottom-right-radius: 10px;
+}
+
+.calculator-button:hover {
+  transition-delay: 100ms;
+  background-color: #c4c4c4;
+}
+
+.calculator-button:active {
+  transition-delay: 100ms;
+  background-color: #afafaf;
+}
+
+.calculator .orange:hover {
+  transition-delay: 100ms;
+  background-color: #d68222;
+}
+
+.calculator .orange:active {
+  transition-delay: 100ms;
+  background-color: #c17620;
 }
