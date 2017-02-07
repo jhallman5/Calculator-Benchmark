@@ -1,0 +1,22 @@
+{
+  "name": "calculator-benchmark",
+  "version": "1.0.0",
+  "description": "week 10 ",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jhallman5/Calculator-Benchmark.git"
+  },
+  "author": "jhallman5",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jhallman5/Calculator-Benchmark/issues"
+  },
+  "homepage": "https://github.com/jhallman5/Calculator-Benchmark#readme",
+  "dependencies": {
+    "normalize.css": "^5.0.0"
+  }
+}
