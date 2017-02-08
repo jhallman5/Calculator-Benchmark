@@ -1,4 +1,4 @@
-@import 'normalize';
+@import 'normalize.css';
 @import url('https://fonts.googleapis.com/css?family=Roboto');
 
 body {
@@ -53,7 +53,7 @@ body {
 
 .calculator .corner {
   border-bottom-right-radius: 10px;
-  padding-left: 0.5px;
+  padding-left: 0.px;
 }
 
 .calculator-button:hover {
