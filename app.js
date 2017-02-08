@@ -7,7 +7,6 @@ var memory = {
 document.querySelectorAll(".operator").forEach(function(sign) {
   (sign).addEventListener('click', function(){
     memory.sign.push(this.innerHTML)
-    console.log("sign: " + memory.sign)
   })
 })
 
@@ -29,8 +28,7 @@ document.querySelectorAll(".calculator-button").forEach(function(div) {
         memory.latter.splice(memory.latter.length - 1, 1)
       document.querySelector('.calculator-screen').innerHTML = memory.latter.join('')
     }
-    console.log(memory)
-    console.log(typeof div.innerHTML)
+    // console.log(memory)
   })
 })
 document.querySelectorAll(".corner").forEach(function(div) {
@@ -66,20 +64,3 @@ function multiply(a, b) {
 function divide(a, b){
   return a / b
 }
-
-// function addtion(currentNumber, nextNumber){
-//   var currentNumber = document.querySelector('.calculator-screen').innerHTML
-//   console.log(currentNumber)
-//   document.querySelector('.calculator-screen').innerHTML = ''
-//   equal(currentNumber, + , )
-//   on equals (nextNumber = document.querySelector('.calculator-screen').innerHTML)
-//   document.querySelector('.calculator-screen').innerHTML = currentNumber + nextNumber             ...0
-// }
-//
-// function equal(previousNumber, sign, currentNumber) {
-//   if (sign === +)
-//     return previousNumber + currentNumber
-//   if (sign === -)
-//     return previousNumber - currentNumber
-//
-// }
