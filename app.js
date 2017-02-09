@@ -1,7 +1,6 @@
 var memory = {
   initial: [],
-  operation: undefined,
-  latter: []
+  operation: undefined, r: []
 }
 
 function operationAdder(div) {
@@ -20,6 +19,7 @@ function numberCounter(div) {
 
 document.querySelectorAll(".calculator-button").forEach(function(div) {
   div.addEventListener('click', numberCounter )
+  div.addEventListener('keyup', numberCounter )
   div.addEventListener('click', function(){
     if(div.innerHTML === "AC"){
       memory = {
