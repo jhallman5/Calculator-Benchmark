@@ -5,12 +5,9 @@ var memory = {
 }
 
 document.querySelector('.calculator').addEventListener('click', function(e) {
-
-  //display variable is not working
-  var display = document.querySelector('.calculator-screen').innerHTML
   var target = e.target || e.srcElement
 
-  if(memory.operation){
+  if (memory.operation) {
     memory.current = memory.latter
   }else {
     memory.current = memory.initial
@@ -20,33 +17,30 @@ document.querySelector('.calculator').addEventListener('click', function(e) {
     memory.operation = target.dataset.operation
   }
 
-  if( target.dataset.value ){
+  if (target.dataset.value ) {
     memory.current.push(target.dataset.value)
     document.querySelector('.calculator-screen').innerHTML = memory.initial.join('')
   }
 
-  if(memory.initial.length > 0 ){
+  if (memory.current.length > 0 ) {
     document.querySelector('.clear').innerHTML = 'C'
-    document.querySelector('.clear').dataset.clear = 'C'
   }
 
-  if(target.dataset.clear){
-    if(target.dataset.clear === 'AC'){
-      memory = {
-        initial: [],
-        operation: undefined ,
-        latter: []
-      }
-    }else if(target.dataset.clear === 'C'){
+//unclear on why this doesnt work
+  if (target.dataset.clear) {
+    if (memory.current.length === 0) {
+      memory.initial = []
+      memory.operation = undefined
+      memory.latter = []
+    }else if (memory.current.length !== 0) {
       memory.current = []
       target.innerHTML = 'AC'
-      target.dataset.clear = 'AC'
     }
     document.querySelector('.calculator-screen').innerHTML = 0
   }
-//not 100% accurate
-  if(target.dataset.swap) {
-    if(memory.current[0] === '-'){
+
+  if (target.dataset.swap) {
+    if (memory.current[0] === '-') {
       memory.current.shift()
     }else {
       memory.current.unshift('-')
@@ -55,31 +49,21 @@ document.querySelector('.calculator').addEventListener('click', function(e) {
   }
 
 //not quite working
-  if(target.dataset.percent){
-    var negative = false
-    if(memory.current[0] === '-'){
-      memory.current.shift()
-      negative = true
-    }
+  if (target.dataset.percent) {
     var value = parseFloat(memory.current.join(''))
     memory.current = (value / 100).toString().split('')
-
-    if(negative) {
-      memory.current.unshift('-')
-    }
-
     document.querySelector('.calculator-screen').innerHTML  = memory.current.join('')
   }
 
-  if( target.dataset.decimal && memory.current.indexOf('.') === -1 ) {
+  if (target.dataset.decimal && memory.current.indexOf('.') === -1 ) {
     memory.current.push(target.dataset.decimal)
   }
- if(target.dataset.equal) {
+ if (target.dataset.equal) {
     var value1 = parseFloat(memory.initial.join(''))
     var value2 = parseFloat(memory.latter.join(''))
     switch (memory.operation) {
       case '+':
-        value1= add(value1, value2)
+        value1 = add(value1, value2)
         document.querySelector('.calculator-screen').innerHTML = value1
         break;
       case '–':
