@@ -1,88 +1,69 @@
 var memory = {
   initial: [],
-  operation: undefined, r: []
+  operation: undefined,
+  latter: []
 }
 
-function operationAdder(div) {
-  memory.operation = this.innerHTML
-}
+document.querySelector('.calculator').addEventListener('click', function(e) {
+  var target = e.target || e.srcElement
 
-function numberCounter(div) {
-  if( !memory.operation && (this.innerHTML !== 'AC' || '+/-' || '%' || '.' )) {
-      memory.initial.push(this.innerHTML)
-      document.querySelector('.calculator-screen').innerHTML = memory.initial.join('')
-  }else if( memory.operation && (this.innerHTML !== 'AC' || '+/-' || '%' || '.' )) {
-      memory.latter.push(this.innerHTML)
-      document.querySelector('.calculator-screen').innerHTML = memory.latter.join('')
+  if (memory.operation) {
+    memory.current = memory.latter
+  }else {
+    memory.current = memory.initial
   }
-}
 
-document.querySelectorAll(".calculator-button").forEach(function(div) {
-  div.addEventListener('click', numberCounter )
-  div.addEventListener('keyup', numberCounter )
-  div.addEventListener('click', function(){
-    if(div.innerHTML === "AC"){
-      memory = {
-        initial: [],
-        operation: undefined ,
-        latter: []
-      }
-    }
+  if (target.dataset.operation) {
+    memory.operation = target.dataset.operation
+  }
 
-    if(memory.initial.length > 0 ){
-      document.querySelector('.clear').innerHTML = 'C'
-    }
+  if (target.dataset.value ) {
+    memory.current.push(target.dataset.value)
+    document.querySelector('.calculator-screen').innerHTML = memory.initial.join('')
+  }
 
-    if(div.innerHTML === "C" && !memory.operation ){
+  if (memory.current.length > 0 ) {
+    document.querySelector('.clear').innerHTML = 'C'
+  }
+
+//unclear on why this doesnt work
+  if (target.dataset.clear) {
+    if (memory.current.length === 0) {
       memory.initial = []
-      document.querySelector('.calculator-screen').innerHTML = 0
-      div.innerHTML = "AC"
-    }
-    if(div.innerHTML === "C" && memory.operation ){
+      memory.operation = undefined
       memory.latter = []
-      document.querySelector('.calculator-screen').innerHTML = 0
-      div.innerHTML = "AC"
+    }else if (memory.current.length !== 0) {
+      memory.current = []
+      target.innerHTML = 'AC'
     }
+    document.querySelector('.calculator-screen').innerHTML = 0
+  }
 
-    if (div.innerHTML === '+/-' && memory.latter.length === 0 ){
-      var value = parseFloat(memory.initial.join(''))
-      memory.initial = (value * -1).toString().split('')
-    }else if (div.innerHTML === '+/-' && memory.latter.length > 0 ){
-      var value = parseFloat(memory.latter.join(''))
-      memory.latter = (value * -1).toString().split('')
+  if (target.dataset.swap) {
+    if (memory.current[0] === '-') {
+      memory.current.shift()
+    }else {
+      memory.current.unshift('-')
     }
+    document.querySelector('.calculator-screen').innerHTML  = memory.current.join('')
+  }
 
-    if (div.innerHTML === '%' && memory.latter.length === 0 ){
-      var value = parseFloat(memory.initial.join(''))
-      memory.initial = (value / 100).toString().split('')
-    }else if (div.innerHTML === '%' && memory.latter.length > 0 ){
-      var value = parseFloat(memory.latter.join(''))
-      memory.latter = (value / 100).toString().split('')
-    }
+//not quite working
+  if (target.dataset.percent) {
+    var value = parseFloat(memory.current.join(''))
+    memory.current = (value / 100).toString().split('')
+    document.querySelector('.calculator-screen').innerHTML  = memory.current.join('')
+  }
 
-    if( (div.innerHTML === '.') && (memory.latter.length === 0) && (memory.initial.indexOf('.') === -1 ) ){
-      memory.initial.push('.')
-      document.querySelector('.calculator-screen').innerHTML = memory.initial.join('')
-    }else if( (div.innerHTML === '.') && (memory.latter.length > 0) && (memory.latter.indexOf('.') === -1 ) ){
-      memory.latter.push('.')
-      document.querySelector('.calculator-screen').innerHTML = memory.latter.join('')
-    }
-  })
-})
-
-document.querySelectorAll(".operator").forEach(function(div) {
-  div.addEventListener('click', operationAdder )
-  div.removeEventListener('click', numberCounter )
-})
-
-document.querySelectorAll(".corner").forEach(function(div) {
-  div.removeEventListener('click', operationAdder )
-  div.addEventListener('click', function(){
+  if (target.dataset.decimal && memory.current.indexOf('.') === -1 ) {
+    memory.current.push(target.dataset.decimal)
+  }
+ if (target.dataset.equal) {
     var value1 = parseFloat(memory.initial.join(''))
     var value2 = parseFloat(memory.latter.join(''))
     switch (memory.operation) {
       case '+':
-        value1= add(value1, value2)
+        value1 = add(value1, value2)
         document.querySelector('.calculator-screen').innerHTML = value1
         break;
       case '–':
@@ -99,7 +80,7 @@ document.querySelectorAll(".corner").forEach(function(div) {
         break;
     }
     memory.initial = value1.toString().split('')
-  })
+  }
 })
 
 function add(a, b) {
